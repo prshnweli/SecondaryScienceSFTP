@@ -5,8 +5,7 @@ import numpy as np
 import csv
 
 #Function to create files
-#scCMD: school additional sql command
-def creator(csvFile):
+def creator(sqlFile, csvFile):
     # connection
     conn = pyodbc.connect('Driver={SQL Server};'
     'Server=MHU-DBWH;'
@@ -16,7 +15,7 @@ def creator(csvFile):
 
     cursor = conn.cursor()
 
-    file = open('HMHstudentUsers.sql', 'r')
+    file = open(sqlFile, 'r')
     sqlFile = file.read()
     file.close()
 
@@ -34,4 +33,25 @@ def creator(csvFile):
 
     # edit csv
     # df = pd.read_csv(csvFile, encoding = "ISO-8859-1")
-creator("HMHstudentUsers.csv")
+creator('HMHstudentUsers.sql', "HMHstudentUsers.csv")
+creator('HMHclassassignmentStudents.sql', "HMHclassassignmentStudents.csv")
+
+def editor(csvinput, csvoutput):
+    file_name = csvinput
+    file_name_output = csvoutput
+
+    df = pd.read_csv(file_name, engine='python')
+    df.drop_duplicates(subset=None, inplace=True)
+
+# Write the results to a different file
+    df.to_csv(file_name_output, index=False)
+editor("HMHstudentUsers.csv", "my_file_without_dupes.csv")
+editor("CLASS.csv", "CLASS_WITHOUT_DUPES.csv")
+
+def merger():
+    a = pd.read_csv('test1.csv')
+    b = pd.read_csv('test2.csv')
+    df = pd.concat([a,b])
+    print(df)
+    df.to_csv('test3.csv', index=False)
+merger()
