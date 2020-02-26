@@ -33,8 +33,8 @@ def creator(sqlFile, csvFile):
 
     # edit csv
     # df = pd.read_csv(csvFile, encoding = "ISO-8859-1")
-creator('HMHstudentUsers.sql', "HMHstudentUsers.csv")
-creator('HMHclassassignmentStudents.sql', "HMHclassassignmentStudents.csv")
+creator('sql/HMHstudentUsers.sql', "students/studentUsers.csv")
+creator('sql/HMHclassassignmentStudents.sql', "students/classassignmentStudents.csv")
 
 def editor(csvinput, csvoutput):
     file_name = csvinput
@@ -45,13 +45,15 @@ def editor(csvinput, csvoutput):
 
 # Write the results to a different file
     df.to_csv(file_name_output, index=False)
-editor("HMHstudentUsers.csv", "my_file_without_dupes.csv")
-editor("CLASS.csv", "CLASS_WITHOUT_DUPES.csv")
+editor("students/studentUsers.csv", 'students/updatedUsers.csv')
+editor("students/classassignmentStudents.csv", 'students/updatedClassAssignment.csv')
 
-def merger():
-    a = pd.read_csv('test1.csv')
-    b = pd.read_csv('test2.csv')
-    df = pd.concat([a,b])
-    print(df)
-    df.to_csv('test3.csv', index=False)
-merger()
+def merger(filea, fileb, filec):
+    a = pd.read_csv(filea)
+    b = pd.read_csv(fileb)
+    c = pd.concat([a,b])
+    #print(c)
+    c.to_csv(filec, index=False)
+
+merger('teachers/CLASSASSIGNMENT.csv', 'students/updatedClassAssignment.csv', 'hmh/CLASSASSIGNMENT.csv')
+merger('teachers/USERS.csv', 'students/updatedUsers.csv', 'hmh/USERS.csv')
