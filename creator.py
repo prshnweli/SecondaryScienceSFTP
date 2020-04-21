@@ -3,6 +3,7 @@ import pandas as pd
 import pyodbc
 import numpy as np
 import csv
+import config
 
 #Function to create files
 def creator(sqlFile, csvFile):
