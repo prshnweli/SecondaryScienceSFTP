@@ -9,9 +9,11 @@ import config
 def creator(sqlFile, csvFile):
     # connection
     conn = pyodbc.connect('Driver={SQL Server};'
-    'Server=MHU-DBWH;'
-    'Database=Aeries;'
-    'Trusted_Connection=yes;')
+    'Server='+config.Server+';'
+    'Database='+config.Database+';'
+    'UID='+config.UID+';'
+    'PWD='+config.PWD+';'
+    )
     # start connection
 
     cursor = conn.cursor()
@@ -58,3 +60,8 @@ def merger(filea, fileb, filec):
 
 merger('teachers/CLASSASSIGNMENT.csv', 'students/updatedClassAssignment.csv', 'hmh/CLASSASSIGNMENT.csv')
 merger('teachers/USERS.csv', 'students/updatedUsers.csv', 'hmh/USERS.csv')
+
+# def murphyedit():
+#     df = pd.read_csv('hmh/CLASSASSIGNMENT.csv', engine='python')
+#     df.loc[df["CLASSLOCALID"]=="1120_21", "CLASSLOCALID"] = 1119_21
+#     df.to_csv("test.csv", index = False)
