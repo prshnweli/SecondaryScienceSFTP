@@ -60,8 +60,3 @@ def merger(filea, fileb, filec):
 
 merger('teachers/CLASSASSIGNMENT.csv', 'students/updatedClassAssignment.csv', 'hmh/CLASSASSIGNMENT.csv')
 merger('teachers/USERS.csv', 'students/updatedUsers.csv', 'hmh/USERS.csv')
-
-# def murphyedit():
-#     df = pd.read_csv('hmh/CLASSASSIGNMENT.csv', engine='python')
-#     df.loc[df["CLASSLOCALID"]=="1120_21", "CLASSLOCALID"] = 1119_21
-#     df.to_csv("test.csv", index = False)
